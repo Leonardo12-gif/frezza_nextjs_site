@@ -32,15 +32,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "pnpm" # Manter o cache para pnpm
+          # Não vamos mais cachear pnpm aqui, pois vamos instalar globalmente
 
-      - name: Enable Corepack and Prepare PNPM
-        run: |
-          corepack enable
-          corepack prepare pnpm@8 --activate # Você pode usar pnpm@8 ou pnpm@latest
+      - name: Install PNPM globally using NPM
+        run: npm install -g pnpm@8 # Você pode especificar a versão 8 ou usar pnpm@latest
         shell: bash
 
-      - name: Install Dependencies
+      - name: Install Dependencies with PNPM
         run: pnpm install --frozen-lockfile
 
       - name: Build with Next.js
