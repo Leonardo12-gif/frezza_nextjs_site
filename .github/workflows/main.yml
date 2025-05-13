@@ -31,13 +31,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" 
-          cache: "pnpm"
+          node-version: "20"
+          cache: "pnpm" # Manter o cache para pnpm
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4.0.0 # <--- VERSÃO ATUALIZADA AQUI
-        with:
-          version: 8 # Ou a versão do pnpm que você está usando
+      - name: Enable Corepack and Prepare PNPM
+        run: |
+          corepack enable
+          corepack prepare pnpm@8 --activate # Você pode usar pnpm@8 ou pnpm@latest
+        shell: bash
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
