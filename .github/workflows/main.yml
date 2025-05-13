@@ -41,7 +41,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build with Next.js (ignora erro de lint)
-        run: next build || true
+        run: pnpm exec next build || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
